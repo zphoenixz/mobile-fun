@@ -5,11 +5,39 @@ class CustomTheme {
   static ThemeData get lightTheme {
     return ThemeData(
       fontFamily: Constants.mainFont,
+      appBarTheme: const AppBarTheme(
+        color: Constants.appBarColor,
+      ),
+      tabBarTheme: const TabBarTheme(
+        indicator: BoxDecoration(
+          color: Constants.mediumBlackColor,
+        ),
+        labelStyle: TextStyle(
+          fontSize: Constants.bodyFont,
+          fontFamily: Constants.mainFont,
+        ),
+        unselectedLabelColor: Constants.mediumBlackColor,
+        unselectedLabelStyle: TextStyle(
+          fontSize: Constants.bodyFont,
+          fontFamily: Constants.mainFont,
+        ),
+      ),
       textTheme: const TextTheme(
         displayLarge: TextStyle(
           fontSize: Constants.titleFont,
           fontFamily: Constants.mainFont,
-          color: Colors.black87,
+          color: Constants.mediumBlackColor,
+        ),
+        displayMedium: TextStyle(
+          fontSize: Constants.bodyFont,
+          fontFamily: Constants.mainFont,
+          color: Colors.white,
+        ),
+        titleLarge: TextStyle(
+          fontSize: Constants.titleFont,
+          fontFamily: Constants.mainFont,
+          color: Constants.mediumBlackColor,
+          fontWeight: FontWeight.bold,
         ),
       ),
     );
