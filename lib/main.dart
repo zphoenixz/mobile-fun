@@ -4,9 +4,12 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import './core/routes/routes.dart';
+import 'bl/models/enums/auth_status.dart';
+import 'bl/providers/auth_provider.dart';
+import 'bl/providers/posts_provider.dart';
 import 'core/theme/custom_theme.dart';
-import 'utils/constants.dart';
 import 'view/pages/home_page.dart';
+import 'view/pages/post_page.dart';
 
 Future<void> main() async {
   await _init();
@@ -32,16 +35,35 @@ class MyApp extends StatefulWidget {
 class MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    // return MultiProvider(
-    //   providers: const [],
-    //   child:
-    return MaterialApp(
-      builder: BotToastInit(),
-      navigatorObservers: [BotToastNavigatorObserver()],
-      debugShowCheckedModeBanner: false,
-      onGenerateRoute: NavigationRoute.instance.generateRoute,
-      supportedLocales: const [Locale('en', 'US')],
-      theme: CustomTheme.lightTheme,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => AuthProvider(),
+        ),
+        ChangeNotifierProxyProvider<AuthProvider, PostsProvider>(
+          create: (ctx) => PostsProvider(),
+          update: (ctx, authProvider, prevPostsProvider) =>
+              prevPostsProvider!..update(),
+        ),
+      ],
+      child: MaterialApp(
+        builder: BotToastInit(),
+        navigatorObservers: [BotToastNavigatorObserver()],
+        debugShowCheckedModeBanner: false,
+        onGenerateRoute: NavigationRoute.instance.generateRoute,
+        supportedLocales: const [Locale('en', 'US')],
+        theme: CustomTheme.lightTheme,
+        home: Selector<AuthProvider, AuthStatus>(
+          selector: (BuildContext context, AuthProvider authProvider) =>
+              authProvider.authStatus,
+          // shouldRebuild: (previous, next) => true,
+          builder: (context, AuthStatus authStatus, child) {
+            return authStatus != AuthStatus.loggedIn
+                ? const HomePage()
+                : const PostPage();
+          },
+        ),
+      ),
     );
   }
 }
