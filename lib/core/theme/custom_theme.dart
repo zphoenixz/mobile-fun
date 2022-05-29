@@ -32,12 +32,24 @@ class CustomTheme {
           fontSize: Constants.bodyFont,
           fontFamily: Constants.mainFont,
           color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+        headlineMedium: TextStyle(
+          fontSize: Constants.bodyFont,
+          fontFamily: Constants.mainFont,
+          color: Constants.mediumBlackColor,
         ),
         titleLarge: TextStyle(
           fontSize: Constants.titleFont,
           fontFamily: Constants.mainFont,
           color: Constants.mediumBlackColor,
           fontWeight: FontWeight.bold,
+        ),
+        bodyLarge: TextStyle(
+          fontSize: Constants.contentFont,
+          fontFamily: Constants.mainFont,
+          color: Constants.mediumBlackColor,
+          fontWeight: FontWeight.w100,
         ),
       ),
     );
