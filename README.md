@@ -55,10 +55,16 @@ Use these project as a fun starter. Plenty of improvements can be donde, some of
 
 
 ## Some captures
+<p align="center">
 <img src="https://github.com/zphoenixz/mobile-fun/blob/master/captures/home-all.png" width="400" height="400">
-
+</p>
+<p align="center">
 <img src="https://github.com/zphoenixz/mobile-fun/blob/master/captures/home-favs.png" width="400" height="400">
+</p>
 
+<p align="center">
 <img src="https://github.com/zphoenixz/mobile-fun/blob/master/captures/comments.png" width="400" height="400">
+</p>
+
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
