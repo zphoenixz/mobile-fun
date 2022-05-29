@@ -54,5 +54,7 @@ The pattern is well (not perfect) developed, you can see all the BL correctly or
 Use these project as a fun starter. Plenty of improvements can be donde, some of them are related on the widget heriarchy used, it can be improved, also there some Material feedback being shown on IOS devices.
 
 
+<img src="https://github.com/zphoenixz/mobile-fun/blob/master/captures/home-all.png" width="100" height="100">
+
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
