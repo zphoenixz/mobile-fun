@@ -108,15 +108,13 @@ class _PostPageScaffoldIosState extends State<PostPageScaffoldIos> {
                 shouldRebuild: (previous, next) => true,
                 builder: (context, List<PostInteraction> currentPosts, child) {
                   return currentPosts.isNotEmpty
-                      ? Expanded(
-                          child: SingleChildScrollView(
-                              scrollDirection: Axis.vertical,
-                              child: _selectedTab == 0
-                                  ? PostItemIosView(
-                                      posts: currentPosts, showFavs: false)
-                                  : PostItemIosView(
-                                      posts: currentPosts, showFavs: true)),
-                        )
+                      ? SingleChildScrollView(
+                          scrollDirection: Axis.vertical,
+                          child: _selectedTab == 0
+                              ? PostItemIosView(
+                                  posts: currentPosts, showFavs: false)
+                              : PostItemIosView(
+                                  posts: currentPosts, showFavs: true))
                       : _deleted
                           ? Padding(
                               padding: const EdgeInsets.only(top: 150),
