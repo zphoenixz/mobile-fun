@@ -68,27 +68,26 @@ class _PostPageScaffoldIosState extends State<PostPageScaffoldIos> {
           )
         ],
       ),
-      body: Container(
-        alignment: Alignment.topCenter,
-        padding: const EdgeInsets.symmetric(vertical: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            CupertinoSlidingSegmentedControl<int>(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: CupertinoSlidingSegmentedControl<int>(
               backgroundColor: Constants.appBarColor,
               thumbColor: Constants.mediumBlackColor,
               padding: const EdgeInsets.all(8),
               groupValue: _selectedTab,
               children: {
                 0: SizedBox(
-                    width: screenWidth / 3,
+                    width: screenWidth / 4,
                     child: Text(
                       "All",
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.displayMedium,
                     )),
                 1: SizedBox(
-                  width: screenWidth / 3,
+                  width: screenWidth / 4,
                   child: Text(
                     "Favs",
                     textAlign: TextAlign.center,
@@ -102,41 +101,42 @@ class _PostPageScaffoldIosState extends State<PostPageScaffoldIos> {
                 });
               },
             ),
-            Selector<PostsProvider, List<PostInteraction>>(
-                selector: (BuildContext context, PostsProvider postsProvider) =>
-                    postsProvider.currentPosts,
-                shouldRebuild: (previous, next) => true,
-                builder: (context, List<PostInteraction> currentPosts, child) {
-                  return currentPosts.isNotEmpty
-                      ? SingleChildScrollView(
-                          scrollDirection: Axis.vertical,
-                          child: _selectedTab == 0
-                              ? PostItemIosView(
-                                  posts: currentPosts, showFavs: false)
-                              : PostItemIosView(
-                                  posts: currentPosts, showFavs: true))
-                      : _deleted
-                          ? Padding(
-                              padding: const EdgeInsets.only(top: 150),
-                              child: Text(
-                                "Refresh to get new Posts...",
-                                textAlign: TextAlign.center,
-                                style:
-                                    Theme.of(context).textTheme.headlineMedium,
+          ),
+          Selector<PostsProvider, List<PostInteraction>>(
+              selector: (BuildContext context, PostsProvider postsProvider) =>
+                  postsProvider.currentPosts,
+              shouldRebuild: (previous, next) => true,
+              builder: (context, List<PostInteraction> currentPosts, child) {
+                return currentPosts.isNotEmpty
+                    ? Expanded(
+                        child: SingleChildScrollView(
+                            scrollDirection: Axis.vertical,
+                            child: _selectedTab == 0
+                                ? PostItemIosView(
+                                    posts: currentPosts, showFavs: false)
+                                : PostItemIosView(
+                                    posts: currentPosts, showFavs: true)),
+                      )
+                    : _deleted
+                        ? Padding(
+                            padding: const EdgeInsets.only(top: 150),
+                            child: Text(
+                              "Refresh to get new Posts...",
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.headlineMedium,
+                            ),
+                          )
+                        : const Center(
+                            child: SizedBox(
+                              width: 50,
+                              height: 50,
+                              child: CupertinoActivityIndicator(
+                                radius: 15,
                               ),
-                            )
-                          : const Center(
-                              child: SizedBox(
-                                width: 50,
-                                height: 50,
-                                child: CupertinoActivityIndicator(
-                                  radius: 15,
-                                ),
-                              ),
-                            );
-                }),
-          ],
-        ),
+                            ),
+                          );
+              }),
+        ],
       ),
       bottomNavigationBar: GestureDetector(
         onTap: () async {

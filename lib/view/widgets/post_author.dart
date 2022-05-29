@@ -112,7 +112,6 @@ class _PostAuthorState extends State<PostAuthor> {
                     radius: 15,
                   ),
           );
-          ;
         });
   }
 }
